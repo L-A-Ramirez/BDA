@@ -39,3 +39,19 @@ insert into piloto_personal (nroLegajo_piloto, nroLegajo_personal)
 values (54826547,54826547);
 insert into piloto_personal (nroLegajo_piloto, nroLegajo_personal)
 values (87965248,87965248);
+
+-- ------------------------
+-- Update
+-- ------------------------
+-- actualizame personal, modificame el nombre y que sea igual a "juan"
+-- donde "nroLegajo" sea igual a "35465468"
+update personal set nombre = "Juan" where nroLegajo = 35465468;
+update aviones set fabricante = "Embraer" where nro = 08;
+
+
+-- ------------------------
+-- Delete
+-- ------------------------
+delete from piloto_personal where id = 3;
+
+select * from piloto_personal;
