@@ -23,10 +23,10 @@ use aerolinea;
 
 -- Creamos tabla pasajeros
 CREATE TABLE vuelos(
-	nro int primary key,
-    hora time,
+	nro int primary key auto_increment,
+    horaSalida int,
     fecha date,
-    horaLlegada time,
+    horaLlegada int,
     ciudad varchar(50)
 );
 
@@ -57,7 +57,7 @@ create table pilotos(
 );
 
 create table piloto_personal(
-	id int primary key,
+	id int primary key auto_increment,
     nroLegajo_piloto int,
     nroLegajo_personal int
 );
