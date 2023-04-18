@@ -31,6 +31,14 @@ CREATE TABLE vuelos(
     precio double
 );
 
+create table personas (
+	pasaporte int primary key,
+    nombre varchar(50),
+    apellido varchar(50),
+    tel int,
+    email varchar(50)
+);
+
 CREATE TABLE pasajeros(
 	pasaporte int PRIMARY KEY,
 	nro_vuelo int
@@ -96,3 +104,7 @@ references pilotos (nroLegajo);
 alter table piloto_personal 
 add foreign key (nroLegajo_personal)
 references personal (nroLegajo);
+
+alter table personas 
+add foreign key (pasaporte)
+references pasajeros (pasaporte);

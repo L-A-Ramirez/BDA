@@ -14,6 +14,10 @@ values (1500, '2023-06-04', 1800, 'venezuela',28000.50);
 insert into pasajeros (pasaporte, nro_vuelo) values (23456984, 1);
 insert into pasajeros (pasaporte, nro_vuelo) values (34562654, 3);
 insert into pasajeros (pasaporte, nro_vuelo) values (24449875, 2);
+insert into pasajeros (pasaporte, nro_vuelo) values (26547896, 5);
+insert into pasajeros (pasaporte, nro_vuelo) values (85545656, 5);
+insert into pasajeros (pasaporte, nro_vuelo) values (88554543, 5);
+insert into pasajeros (pasaporte, nro_vuelo) values (86743524, 4);
 
 -- Ingreso registro de "avion"
 insert into aviones (nro, modelo, fabricante, capacidad, angar, nro_vuelo) 
@@ -43,6 +47,14 @@ insert into piloto_personal (nroLegajo_piloto, nroLegajo_personal)
 values (54826547,54826547);
 insert into piloto_personal (nroLegajo_piloto, nroLegajo_personal)
 values (87965248,87965248);
+
+INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('23456984', 'juanito', 'perez', '2058901', 'lolo@gmail.com');
+INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('34562654', 'Carlos', 'Gonzales', '2645326225', 'carlitos@gmail.com');
+INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('24449875', 'Jeronimo', 'Ledezma', '114534623', 'Jero@gmail.com');
+INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('26547896', 'Sebastian', 'Perez', '114532345', 'SebaP@gmail.com');
+INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('85545656', 'Brenda', 'Muro', '112346342', 'brenn@gmail.com');
+INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('88554543', 'Leila', 'Mendez', '1145324563', 'leilaM@gmail.com');
+INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('86743524', 'Jerine', 'Morales', '114574342', 'Jeri@gmail.com');
 
 -- ------------------------
 -- Update
