@@ -1,10 +1,14 @@
 -- Ingreso registros de "vuelos"
-insert into vuelos (horaSalida, fecha, horaLlegada, ciudad) 
-values (1330, '2023-04-18', 1530, 'MDQ');
-insert into vuelos (horaSalida, fecha, horaLlegada, ciudad) 
-values (1520, '2023-04-10', 1730, 'Bariloche');
-insert into vuelos (horaSalida, fecha, horaLlegada, ciudad) 
-values (1600, '2023-05-15', 2000, 'chile');
+insert into vuelos (horaSalida, fecha, horaLlegada, ciudad,precio) 
+values (1330, '2023-04-18', 1530, 'MDQ', 20000.00);
+insert into vuelos (horaSalida, fecha, horaLlegada, ciudad,precio) 
+values (1520, '2023-04-10', 1730, 'Bariloche',23000.00);
+insert into vuelos (horaSalida, fecha, horaLlegada, ciudad,precio) 
+values (1600, '2023-05-15', 2000, 'chile',25000.00);
+insert into vuelos (horaSalida, fecha, horaLlegada, ciudad,precio) 
+values (1400, '2023-06-01', 1700, 'colombia',27000.50);
+insert into vuelos (horaSalida, fecha, horaLlegada, ciudad,precio) 
+values (1500, '2023-06-04', 1800, 'venezuela',28000.50);
 
 -- Ingreso registro de pasajeros
 insert into pasajeros (pasaporte, nro_vuelo) values (23456984, 1);

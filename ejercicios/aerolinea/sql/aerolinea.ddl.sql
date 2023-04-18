@@ -27,7 +27,8 @@ CREATE TABLE vuelos(
     horaSalida int,
     fecha date,
     horaLlegada int,
-    ciudad varchar(50)
+    ciudad varchar(50),
+    precio double
 );
 
 CREATE TABLE pasajeros(
