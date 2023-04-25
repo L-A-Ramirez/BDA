@@ -17,9 +17,11 @@ insert into pasajeros (pasaporte, nro_vuelo) values (23456984, 1);
 insert into pasajeros (pasaporte, nro_vuelo) values (34562654, 3);
 insert into pasajeros (pasaporte, nro_vuelo) values (24449875, 2);
 insert into pasajeros (pasaporte, nro_vuelo) values (26547896, 5);
-insert into pasajeros (pasaporte, nro_vuelo) values (85545656, 5);
-insert into pasajeros (pasaporte, nro_vuelo) values (88554543, 5);
-insert into pasajeros (pasaporte, nro_vuelo) values (86743524, 4);
+insert into pasajeros (pasaporte, nro_vuelo) values (24597991, 5);
+insert into pasajeros (pasaporte, nro_vuelo) values (26541234, 4);
+insert into pasajeros (pasaporte, nro_vuelo) values (85545656, null);
+insert into pasajeros (pasaporte, nro_vuelo) values (88554543, null);
+insert into pasajeros (pasaporte, nro_vuelo) values (86743524, null);
 
 -- Ingreso registro de "avion"
 insert into aviones (nro, modelo, fabricante, capacidad, angar, nro_vuelo) 
@@ -56,7 +58,9 @@ INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `e
 INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('26547896', 'Sebastian', 'Perez', '114532345', 'SebaP@gmail.com');
 INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('85545656', 'Brenda', 'Muro', '112346342', 'brenn@gmail.com');
 INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('88554543', 'Leila', 'Mendez', '1145324563', 'leilaM@gmail.com');
+INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('24597991', 'Juan', 'Mendez', '445454545', 'juanM@gmail.com');
 INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('86743524', 'Jerine', 'Morales', '114574342', 'Jeri@gmail.com');
+INSERT INTO `aerolinea`.`personas` (`pasaporte`, `nombre`, `apellido`, `tel`, `email`) VALUES ('26541234', 'Agustin', 'Morales', '123456489', 'Agustin@gmail.com');
 
 -- ------------------------
 -- Update

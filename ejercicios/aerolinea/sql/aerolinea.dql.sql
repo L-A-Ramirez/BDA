@@ -23,9 +23,23 @@ select horaSalida, horaLlegada, ciudad, (horaLlegada - horaSalida) as HorasTotal
 -- Obtengo un vuelo con descuento del 20%
 select ciudad, precio, (precio*0.8) descuento_20 from vuelos;
 
-/* Group */
+/* Group y having */
 -- Agrupamos y contamos la cantidad de vuelos a distintas ciudades
 select count(ciudad), ciudad from vuelos group by ciudad;
+
+/* 
+	Agrupamos y contamos la suma de precio de los vuelos que sean mayores 
+	al promedio del precio de chile
+*/
+select @promChile:=avg(precio) from vuelos where ciudad = "chile";
+
+select avg(precio), ciudad from vuelos
+join pasajeros on vuelos.nro = pasajeros.nro_vuelo
+group by ciudad having avg(precio) > @promChile;
+
+select sum(precio), ciudad from vuelos
+join pasajeros on vuelos.nro = pasajeros.nro_vuelo
+where ciudad = "colombia";
 
 /* consulta con funcion simple */
 
@@ -52,7 +66,7 @@ select sum(precio) promedio_total from vuelos where ciudad = "mdq";
 /* 
 	Consulta condicionada: 
     mayor(>), menor(<), menor igual (<=), mayor igual (>=) 
-    un resultado y otro (and/between), un resultado u otro (or/in)
+    Intervalo entre (and/between), un resultado u otro (or/in)
 */
 -- Quiero sacar el vuelo con el precio menor o igual a 20000
 select horaSalida, horaLlegada, (horaLlegada - horaSalida) 
@@ -69,9 +83,15 @@ SELECT ciudad, precio FROM vuelos WHERE ciudad IN('chile','MDQ');
 -- Quiero sacar la ciudad de mdq y el precio "18000"
 select ciudad, precio from vuelos where ciudad = "MDQ" and precio = 18000;
 
--- Quiero sacar el precio entre "18000" y "25000" -- Pendiente
-select min(precio) precio_min, max(precio) precio_max
-from vuelos;
+-- Guardo en variables diferentes el precio maximo y el precio minimo
+select @minPrecio := max(precio) from vuelos;
+select @maxPrecio := min(precio) from vuelos;
+
+-- Quiero sacar el precio entre "18000" y "29000" -- Pendiente
+select precio from vuelos where precio between 18000 and 29000 order by precio;
+
+-- Quiero sacar el precio minimo y el maximo
+select precio from vuelos where precio = @minPrecio or precio = @maxPrecio;
 
 /* 
 	Join 
@@ -90,3 +110,51 @@ where ciudad = "venezuela";
 select count(pasaporte) cantidad_pasajeros, ciudad from pasajeros as p 
 join vuelos as v on p.nro_vuelo = v.nro
 where ciudad = "venezuela";
+
+select * from pasajeros pas join personas per
+on per.pasaporte = pas.pasaporte;
+
+/* 
+	Seleccioname la fecha, hora de salida, ciudad, angar, pasaporte, el nombre 
+	y el apellido de personas con vuelos
+*/
+select v.fecha, v.horaSalida, v.ciudad, a.angar, p.pasaporte, p.nombre, p.apellido 
+from vuelos v join pasajeros psj on v.nro = psj.nro_vuelo 
+join personas p on p.pasaporte = psj.pasaporte 
+join aviones a on v.nro = a.nro;
+
+/* 
+	Seleccioname la fecha, hora de salida, ciudad, angar, pasaporte, el nombre 
+	y el apellido de personas con vuelos
+*/
+select v.fecha, v.horaSalida, v.ciudad, a.angar, p.pasaporte, p.nombre, p.apellido 
+from vuelos v join pasajeros psj on v.nro = psj.nro_vuelo 
+join personas p on p.pasaporte = psj.pasaporte 
+join aviones a on v.nro = a.nro where p.pasaporte = 26547896;
+
+/* 
+	left join: Trae registros de la izquierda que tengan y no tenga relación con la tabla derecha
+    right join: Trae registros de la derecha que tengan y no tenga relación con la tabla izquierda
+    inner join: Trae registros que solo tengan relación (es igual a "join")
+*/
+
+/* 
+	Traeme los pasajeros que tengan vuelos y los que no lo tengan
+	(seleccionando la tabla correspondiente (right join))
+*/
+select v.fecha, v.horaSalida, v.ciudad, p.pasaporte 
+from vuelos v right join pasajeros p on v.nro = p.nro_vuelo;
+
+-- Traeme vuelos que tengan y no tengan pasajeros
+select v.fecha, v.horaSalida, v.ciudad, p.pasaporte 
+from vuelos v left join pasajeros p on v.nro = p.nro_vuelo;
+
+-- Traeme vuelos que tengan y no tengan pasajeros de colombia
+select v.fecha, v.horaSalida, v.ciudad, p.pasaporte 
+from vuelos v left join pasajeros p on v.nro = p.nro_vuelo 
+where v.ciudad = "colombia";
+
+-- Traeme a los pasajeros que no tengan vuelos
+select v.fecha, v.horaSalida, v.ciudad, p.pasaporte 
+from vuelos v right join pasajeros p on v.nro = p.nro_vuelo where p.nro_vuelo 
+is null;
