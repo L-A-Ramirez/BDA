@@ -1,4 +1,4 @@
--- Ingreso registros de "vuelos"
+-- - Ingreso registros de "vuelos"
 insert into vuelos (horaSalida, fecha, horaLlegada, ciudad,precio) 
 values (1330, '2023-04-18', 1530, 'MDQ', 20000.00);
 insert into vuelos (horaSalida, fecha, horaLlegada, ciudad,precio) 
@@ -24,11 +24,11 @@ insert into pasajeros (pasaporte, nro_vuelo) values (88554543, null);
 insert into pasajeros (pasaporte, nro_vuelo) values (86743524, null);
 
 -- Ingreso registro de "avion"
-insert into aviones (nro, modelo, fabricante, capacidad, angar, nro_vuelo) 
+insert into aviones (nro, modelo, fabricante, capacidad, pista, nro_vuelo) 
 values (12, '420', 'PAMPA', 300, 'A2', 3);
-insert into aviones (nro, modelo, fabricante, capacidad, angar, nro_vuelo) 
+insert into aviones (nro, modelo, fabricante, capacidad, pista, nro_vuelo) 
 values (08, '320', 'AeroSA', 400, 'A1', 1);
-insert into aviones (nro, modelo, fabricante, capacidad, angar, nro_vuelo) 
+insert into aviones (nro, modelo, fabricante, capacidad, pista, nro_vuelo) 
 values (05, '120', 'PAMPA', 300, 'C2', 2);
 
 -- ingreso registro de "personal"
@@ -74,6 +74,6 @@ update aviones set fabricante = "Embraer" where nro = 08;
 -- ------------------------
 -- Delete
 -- ------------------------
-delete from piloto_personal where id = 3;
+-- delete from piloto_personal where id = 3;
 
-select * from piloto_personal;
+-- select * from piloto_personal;

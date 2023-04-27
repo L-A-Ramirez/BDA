@@ -1,5 +1,5 @@
 -- Comentario de una linea
-
+-- asd
 /* 
 	Comentario de bloque
 */
@@ -56,7 +56,7 @@ CREATE TABLE aviones(
     modelo varchar(50),
     fabricante varchar(50),
     capacidad int,
-    angar varchar(12),
+    pista varchar(12),
     nro_vuelo int
 );
 
