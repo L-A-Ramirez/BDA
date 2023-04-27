@@ -2,13 +2,6 @@
 	Consultas
 */
 
-select * from vuelos;
-select * from pasajeros;
-select * from aviones;
-select * from personal;
-select * from pilotos;
-select * from piloto_personal;
-
 /* 
 	Se requiere saber las horas totales de vuelo 
 	que tuvo el piloto y la ciudad de destino
@@ -34,9 +27,9 @@ select count(ciudad), ciudad from vuelos group by ciudad;
 select @promChile:=avg(precio) from vuelos where ciudad = "chile";
 
 select avg(precio), ciudad from vuelos
-join pasajeros on vuelos.nro = pasajeros.nro_vuelo
 group by ciudad having avg(precio) > @promChile;
 
+-- sumar el precio de los vuelos con destino a "colombia"
 select sum(precio), ciudad from vuelos
 join pasajeros on vuelos.nro = pasajeros.nro_vuelo
 where ciudad = "colombia";
@@ -78,7 +71,7 @@ as Horas_Totales, ciudad, precio from vuelos where precio >= 20000;
 
 -- Quiero sacar la ciudad de mdq o chile
 select ciudad, precio from vuelos where ciudad = "MDQ" or ciudad = "chile";
-SELECT ciudad, precio FROM vuelos WHERE ciudad IN('chile','MDQ');
+SELECT ciudad, precio FROM vuelos WHERE ciudad IN ('chile','MDQ');
 
 -- Quiero sacar la ciudad de mdq y el precio "18000"
 select ciudad, precio from vuelos where ciudad = "MDQ" and precio = 18000;
@@ -111,8 +104,32 @@ select count(pasaporte) cantidad_pasajeros, ciudad from pasajeros as p
 join vuelos as v on p.nro_vuelo = v.nro
 where ciudad = "venezuela";
 
+
 select * from pasajeros pas join personas per
 on per.pasaporte = pas.pasaporte;
+
+-- --------------- Join
+/*
+	Inner join explícito
+*/
+select fecha, horaSalida, ciudad, pasaporte 
+from vuelos join pasajeros
+on vuelos.nro = pasajeros.nro_vuelo having ciudad = "colombia";
+
+/*
+	Inner join implícito (opcional)
+*/
+-- Usar 2 condiciones: Cuando hayamos usando el where y requerimos de 
+-- otra condición usaremos having
+select fecha, horaSalida, ciudad, pasaporte 
+from vuelos, pasajeros
+where vuelos.nro = pasajeros.nro_vuelo having ciudad = "colombia";
+
+/*
+	Inner join natural (opcional)
+    Siempre y cuando la pk y la fk tengan el mismo nombre
+*/
+select * from pasajeros pas natural join personas per;
 
 /* 
 	Seleccioname la fecha, hora de salida, ciudad, angar, pasaporte, el nombre 
@@ -132,29 +149,34 @@ from vuelos v join pasajeros psj on v.nro = psj.nro_vuelo
 join personas p on p.pasaporte = psj.pasaporte 
 join aviones a on v.nro = a.nro where p.pasaporte = 26547896;
 
-/* 
-	left join: Trae registros de la izquierda que tengan y no tenga relación con la tabla derecha
-    right join: Trae registros de la derecha que tengan y no tenga relación con la tabla izquierda
+/*
+	left join: Trae todos los registros de la izquierda que tengan y no relación con la tabla derecha
+    right join: Trae todos los registros de la derecha que tengan y no relación con la tabla izquierda
     inner join: Trae registros que solo tengan relación (es igual a "join")
 */
 
 /* 
-	Traeme los pasajeros que tengan vuelos y los que no lo tengan
+	Traeme todos los pasajeros que tengan vuelos y los que no lo tengan
 	(seleccionando la tabla correspondiente (right join))
 */
 select v.fecha, v.horaSalida, v.ciudad, p.pasaporte 
 from vuelos v right join pasajeros p on v.nro = p.nro_vuelo;
 
--- Traeme vuelos que tengan y no tengan pasajeros
+-- Traeme todos vuelos que tengan y no tengan pasajeros
 select v.fecha, v.horaSalida, v.ciudad, p.pasaporte 
 from vuelos v left join pasajeros p on v.nro = p.nro_vuelo;
 
--- Traeme vuelos que tengan y no tengan pasajeros de colombia
-select v.fecha, v.horaSalida, v.ciudad, p.pasaporte 
-from vuelos v left join pasajeros p on v.nro = p.nro_vuelo 
-where v.ciudad = "colombia";
-
 -- Traeme a los pasajeros que no tengan vuelos
 select v.fecha, v.horaSalida, v.ciudad, p.pasaporte 
-from vuelos v right join pasajeros p on v.nro = p.nro_vuelo where p.nro_vuelo 
-is null;
+from vuelos v right join pasajeros p on v.nro = p.nro_vuelo where p.nro_vuelo is null;
+
+-- ------------- Consultas anidadas
+-- Seleccioname el pasaporte y el nombre de la persona con destino a colombia
+SELECT DISTINCT pasaporte, nombre
+FROM pasajeros as pas natural join personas per
+join vuelos as v on v.nro = pas.nro_vuelo 
+WHERE ciudad in 
+(SELECT ciudad
+FROM vuelos
+WHERE ciudad = 'colombia');
+
