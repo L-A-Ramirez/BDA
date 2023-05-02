@@ -175,8 +175,13 @@ from vuelos v right join pasajeros p on v.nro = p.nro_vuelo where p.nro_vuelo is
 SELECT DISTINCT pasaporte, nombre
 FROM pasajeros as pas natural join personas per
 join vuelos as v on v.nro = pas.nro_vuelo 
-WHERE ciudad in 
-(SELECT ciudad
-FROM vuelos
-WHERE ciudad = 'colombia');
+WHERE ciudad = "colombia";
 
+
+/* 
+	Agrupamos y contamos la suma de precio de los vuelos que sean mayores 
+	al promedio del precio de chile
+*/
+select avg(precio), ciudad from vuelos
+group by ciudad having avg(precio) > (
+	select avg(precio) from vuelos where ciudad = "chile");
